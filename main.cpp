@@ -9,8 +9,8 @@
 
 int main( int argc, const char* argv[] ) {
 
-  const unsigned worldWidth = 10;
-  const unsigned worldHeight = 10;
+  const unsigned int worldWidth = 10;
+  const unsigned int worldHeight = 10;
 
   SimpleWorldRenderer worldRenderer;
   World world(worldWidth, worldHeight);

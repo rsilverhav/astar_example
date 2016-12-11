@@ -7,10 +7,10 @@ SimpleWorldRenderer::SimpleWorldRenderer() {
 }
 
 void SimpleWorldRenderer::renderWorld(const int width, const int height, const World& world, std::vector<Point> path) const {
-  for(unsigned y = 0; y < height; ++y) {
-    for(unsigned x = 0; x < width; ++x) {
+  for(unsigned int y = 0; y < height; ++y) {
+    for(unsigned int x = 0; x < width; ++x) {
 
-      const unsigned index = x + y*width;
+      const unsigned int index = x + y*width;
       int pointIndex = isPointInPath(x, y, path);
 
       if(pointIndex == 0){
@@ -34,7 +34,7 @@ void SimpleWorldRenderer::renderWorld(const int width, const int height, const W
 
 }
 
-int SimpleWorldRenderer::isPointInPath(const unsigned x, const unsigned y, const std::vector<Point> path) const {
+int SimpleWorldRenderer::isPointInPath(const unsigned int x, const unsigned int y, const std::vector<Point> path) const {
   for(int index = 0; index < path.size(); ++index) {
     if(path.at(index).getX() == x && path.at(index).getY() == y) {
       return index;

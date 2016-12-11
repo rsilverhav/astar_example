@@ -1,12 +1,17 @@
 #ifndef path_finder_hpp
 #define path_finder_hpp
 
+#include "point.hpp"
+
 class PathFinder {
   public:
     PathFinder();
 
-    int findPath(const int nStartX, const int nStartY,
-                 const int nTargetX, const int nTargetY, 
+    /**
+     * Find the shortest path between two points in a 2D grid with obstacles. Movement is restricted to horizontal and vertical only (no diagonal).
+     */
+    int findPath(const Point start,
+                 const Point target,
                  const unsigned char* pMap, const int nMapWidth, const int nMapHeight,
                  int* pOutBuffer, const int nOutBufferSize);
 

@@ -3,22 +3,22 @@
 
 class World{
   public:
-    World(const unsigned width, const unsigned height);
+    World(const unsigned int width, const unsigned int height);
 
     ~World();
 
-    const unsigned getWidth() const;
+    const unsigned int getWidth() const;
 
-    const unsigned getHeight() const;
+    const unsigned int getHeight() const;
 
-    void putMapData(const unsigned x, const unsigned y, const unsigned value);
+    void putMapData(const unsigned int x, const unsigned int y, const unsigned int value);
 
-    const unsigned getMapData(const unsigned x, const unsigned y) const;
+    const unsigned int getMapData(const unsigned int x, const unsigned int y) const;
 
   private:
-    const unsigned width_;
-    const unsigned height_;
-    unsigned* mapData_;
+    const unsigned int width_;
+    const unsigned int height_;
+    unsigned int* mapData_;
 }; // class World
 
 #endif // world_hpp

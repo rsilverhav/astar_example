@@ -3,15 +3,15 @@
 
 class Point{
   public:
-    Point(const unsigned x, const unsigned y);
+    Point(const unsigned int x, const unsigned int y);
 
-    const unsigned getX() const;
+    const unsigned int getX() const;
 
-    const unsigned getY() const;
+    const unsigned int getY() const;
 
   private:
-    unsigned x_;
-    unsigned y_;
+    unsigned int x_;
+    unsigned int y_;
 }; // class Point
 
 #endif // point_hpp

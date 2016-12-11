@@ -1,11 +1,11 @@
 #include "world.hpp"
 
-World::World(const unsigned width, const unsigned height) 
+World::World(const unsigned int width, const unsigned int height) 
 : width_(width),
   height_(height),
-  mapData_(new unsigned[width_ + height_*width_]) {
-  for(unsigned y = 0; y < height_; ++y) {
-    for(unsigned x = 0; x < width; ++x) {
+  mapData_(new unsigned int[width_ + height_*width_]) {
+  for(unsigned int y = 0; y < height_; ++y) {
+    for(unsigned int x = 0; x < width; ++x) {
       if(x == 0 || y == 0 || x == width_-1 || y == height_-1) {
         mapData_[x + y*width_] = 0u; // wall
       } else {
@@ -20,18 +20,18 @@ World::~World() {
 }
 
 
-const unsigned World::getWidth() const {
+const unsigned int World::getWidth() const {
   return width_;
 }
 
-const unsigned World::getHeight() const {
+const unsigned int World::getHeight() const {
   return height_;
 }
 
-void World::putMapData(const unsigned x, const unsigned y, const unsigned value){
+void World::putMapData(const unsigned int x, const unsigned int y, const unsigned int value){
   mapData_[x + y*width_] = value;
 }
 
-const unsigned World::getMapData(const unsigned x, const unsigned y) const {
+const unsigned int World::getMapData(const unsigned int x, const unsigned int y) const {
   return mapData_[x + y*width_];
 }

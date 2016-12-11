@@ -1,15 +1,15 @@
 #include "point.hpp"
 
-Point::Point(const unsigned x, const unsigned y) 
+Point::Point(const unsigned int x, const unsigned int y) 
 : x_(x),
   y_(y) {
 
 }
 
-const unsigned Point::getX() const {
+const unsigned int Point::getX() const {
   return x_;
 }
 
-const unsigned Point::getY() const {
+const unsigned int Point::getY() const {
   return y_;
 }
