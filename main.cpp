@@ -1,3 +1,4 @@
+#include "path_finder.hpp"
 #include "path_node.hpp"
 #include "point.hpp"
 #include "simple_world_renderer.hpp"
@@ -26,6 +27,9 @@ int main( int argc, const char* argv[] ) {
     Point p(4, i);
     path.push_back(p);
   }
+
+  PathFinder pathFinder;
+
 
   worldRenderer.renderWorld(worldWidth, worldHeight, world, path);
 
