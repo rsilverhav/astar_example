@@ -10,7 +10,9 @@
 class SimpleWorldRenderer : public Interface::WorldRendererInterface{
   public:
     SimpleWorldRenderer();
-    virtual void renderWorld(const int width, const int height, const World& world) const;
+    virtual void renderWorld(const int width, const int height, const World& world, std::vector<Point> path) const;
+
+    int isPointInPath(const unsigned x, const unsigned y, const std::vector<Point> path) const;
 
 }; // class SimpleWorldRenderer
 

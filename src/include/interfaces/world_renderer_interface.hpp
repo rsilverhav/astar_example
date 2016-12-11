@@ -1,7 +1,10 @@
 #ifndef world_renderer_interface_hpp
 #define world_renderer_interface_hpp
 
+#include "point.hpp"
 #include "world.hpp"
+
+#include <vector>
 
 namespace Interface {
   
@@ -14,7 +17,7 @@ class WorldRendererInterface {
     /*
      * Is called to print the world when a path has been found from StartPoint to EndPoint.
      */
-    virtual void renderWorld(const int width, const int height, const World& world) const = 0;
+    virtual void renderWorld(const int width, const int height, const World& world, std::vector<Point> path) const = 0;
 
 }; // class WorldRendererInterface
 
