@@ -11,7 +11,7 @@ World::World(const unsigned int width, const unsigned int height, const std::str
 }
 
 World::~World() {
-  delete mapData_;
+  delete[] mapData_;
 }
 
 

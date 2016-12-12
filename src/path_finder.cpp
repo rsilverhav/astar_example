@@ -109,7 +109,7 @@ int PathFinder::findPath(const Point start,
  *  Returns: the manhattan distance between grid positions
  */
 int PathFinder::calcHCost(const int fromX, const int fromY, const int nTargetX, const int nTargetY){
-  return abs(nTargetX - fromX) + abs(nTargetY - fromY);
+  return fabs((float)nTargetX - fromX) + fabs((float)nTargetY - fromY);
 }
 
 /**
