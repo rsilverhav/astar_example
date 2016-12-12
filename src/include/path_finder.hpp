@@ -2,6 +2,9 @@
 #define path_finder_hpp
 
 #include "point.hpp"
+#include "world.hpp"
+
+#include <vector>
 
 class PathFinder {
   public:
@@ -12,12 +15,15 @@ class PathFinder {
      */
     int findPath(const Point start,
                  const Point target,
-                 const unsigned char* pMap, const int nMapWidth, const int nMapHeight,
-                 int* pOutBuffer, const int nOutBufferSize);
+                 const World& world,
+                 const unsigned int worldWidth,
+                 const unsigned int worldHeight,
+                 std::vector<Point>& path,
+                 const unsigned int maxLength);
 
   private:
     int calcHCost(const int fromX, const int fromY, const int nTargetX, const int nTargetY);
-    bool isValidTile(const int posX, const int posY, const int nMapWidth, const int nMapHeight, const unsigned char* pMap);
+    bool isValidTile(const int posX, const int posY, const int nMapWidth, const int nMapHeight, const World& world);
 };
 
 

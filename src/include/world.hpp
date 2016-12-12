@@ -15,6 +15,8 @@ class World{
 
     const unsigned int getMapData(const unsigned int x, const unsigned int y) const;
 
+    const bool isWall(const unsigned int x, const unsigned int y) const;
+
   private:
     const unsigned int width_;
     const unsigned int height_;

@@ -16,23 +16,20 @@ PathFinder::PathFinder() {
 
 int PathFinder::findPath(const Point start,
                          const Point target,
-                         const unsigned char* pMap,
-                         const int nMapWidth,
-                         const int nMapHeight,
-                         int* pOutBuffer,
-                         const int nOutBufferSize)
+                         const World& world,
+                         const unsigned int worldWidth,
+                         const unsigned int worldHeight,
+                         std::vector<Point>& path,
+                         const unsigned int maxLength)
 {
 
 
+  // using a priority_queue for searchQueue as this will be really fast for getting the next node with the smallest cost
   priority_queue<pair<int, shared_ptr<PathNode>>, vector<pair<int, shared_ptr<PathNode>>>, std::greater<pair<int, shared_ptr<PathNode>>>> searchQueue;
 
   map<int, shared_ptr<PathNode>> openSet;
   map<int, shared_ptr<PathNode>> closedSet;
 
-
-  if(pOutBuffer == 0){
-    return -1;
-  }
 
   if(start == target){
     return -1;
@@ -43,7 +40,7 @@ int PathFinder::findPath(const Point start,
 
   shared_ptr<PathNode> addNode = make_shared<PathNode>(nullptr, start.getX(), start.getY(), 0, calcHCost(start.getX(), start.getY(), target.getX(), target.getY()));
   searchQueue.emplace(addNode->getFCost(), addNode);
-  openSet[start.getX() + start.getY()*nMapWidth] = addNode;
+  openSet[start.getX() + start.getY()*worldWidth] = addNode;
 
   shared_ptr<PathNode> currentNodeShrPtr;
   PathNode* currentNode;
@@ -55,12 +52,14 @@ int PathFinder::findPath(const Point start,
     currentNode = currentNodeShrPtr.get();
     searchQueue.pop();
 
+    currentNode->printNode("current = ");
+
     // adding the node that is currently being explored to the closed set
-    closedSet[currentNode->getPosX() + currentNode->getPosY()*nMapWidth] = currentNodeShrPtr;
+    closedSet[currentNode->getPosX() + currentNode->getPosY()*worldWidth] = currentNodeShrPtr;
 
     // goal found, setting path and returning length
     if(currentNode->isEqual(target)){
-      int distance = currentNode->setBufferToPath(&pOutBuffer, nMapWidth, start.getX(), start.getY());
+      int distance = currentNode->setBufferToPath(path);
 
       return distance;
     }
@@ -79,15 +78,15 @@ int PathFinder::findPath(const Point start,
         // calculates the position and the index of a neighbour
         checkPosX = currentNode->getPosX()+x;
         checkPosY = currentNode->getPosY()+y;
-        index = checkPosX + checkPosY*nMapWidth;
+        index = checkPosX + checkPosY*worldWidth;
 
         // if the neighbours position is valid and is not in the closed set, continue evaluating
-        if(isValidTile(checkPosX, checkPosY, nMapWidth, nMapHeight, pMap) && closedSet.find(checkPosX + checkPosY*nMapWidth) == closedSet.end()){
+        if(isValidTile(checkPosX, checkPosY, worldWidth, worldHeight, world) && closedSet.find(checkPosX + checkPosY*worldWidth) == closedSet.end()){
 
           int newGCost = currentNode->getGCost() + 1;
 
           // ignore this neighbour if the distance is longer than max path length
-          if(newGCost > nOutBufferSize){
+          if(newGCost > maxLength){
             continue;
           }
           int newHCost = calcHCost(checkPosX, checkPosY, target.getX(), target.getY());
@@ -120,9 +119,9 @@ int PathFinder::calcHCost(const int fromX, const int fromY, const int nTargetX, 
  *
  * Returns: true if posX and posY is inside the map and not on a wall
  */
-bool PathFinder::isValidTile(const int posX, const int posY, const int nMapWidth, const int nMapHeight, const unsigned char* pMap){
+bool PathFinder::isValidTile(const int posX, const int posY, const int worldWidth, const int worldHeight, const World& world){
 
-  if((posX < 0 || posX >= nMapWidth) || (posY < 0 || posY >= nMapHeight) || pMap[posX+posY*nMapWidth] == 0){
+  if((posX < 0 || posX >= worldWidth) || (posY < 0 || posY >= worldHeight) || world.isWall(posX, posY)){
     return false;
   }
   return true;

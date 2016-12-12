@@ -7,11 +7,15 @@ World::World(const unsigned int width, const unsigned int height)
   for(unsigned int y = 0; y < height_; ++y) {
     for(unsigned int x = 0; x < width; ++x) {
       if(x == 0 || y == 0 || x == width_-1 || y == height_-1) {
-        mapData_[x + y*width_] = 0u; // wall
+        putMapData(x, y, 0u); // wall
       } else {
-        mapData_[x + y*width_] = 1u; // wall
+        putMapData(x, y, 1u); // floor
       }
     }
+  }
+
+  for(unsigned int index = 1; index < 3; ++index) {
+    putMapData(5, index, 0u); // wall
   }
 }
 
@@ -34,4 +38,8 @@ void World::putMapData(const unsigned int x, const unsigned int y, const unsigne
 
 const unsigned int World::getMapData(const unsigned int x, const unsigned int y) const {
   return mapData_[x + y*width_];
+}
+
+const bool World::isWall(const unsigned int x, const unsigned int y) const {
+  return getMapData(x, y) == 0;
 }

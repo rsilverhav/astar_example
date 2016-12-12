@@ -6,16 +6,18 @@ SimpleWorldRenderer::SimpleWorldRenderer() {
 
 }
 
-void SimpleWorldRenderer::renderWorld(const unsigned int width, const unsigned int height, const World& world, std::vector<Point> path) const {
+void SimpleWorldRenderer::renderWorld(const unsigned int width, const unsigned int height, const World& world, std::vector<Point> path, const Point& start, const Point& target) const {
   for(unsigned int y = 0; y < height; ++y) {
     for(unsigned int x = 0; x < width; ++x) {
 
       const unsigned int index = x + y*width;
       int pointIndex = isPointInPath(x, y, path);
 
-      if(pointIndex == 0){
+      Point tempPoint(x, y);
+
+      if(tempPoint == start){
         std::cout << "S ";
-      } else if(pointIndex == path.size() - 1) {
+      } else if(tempPoint == target) {
         std::cout << "E ";
       } else if(pointIndex > 0) {
         std::cout << "o ";

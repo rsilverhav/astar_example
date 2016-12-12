@@ -17,7 +17,7 @@ class WorldRendererInterface {
     /*
      * Is called to print the world when a path has been found from StartPoint to EndPoint.
      */
-    virtual void renderWorld(const unsigned int width, const unsigned int height, const World& world, const std::vector<Point> path) const = 0;
+    virtual void renderWorld(const unsigned int width, const unsigned int height, const World& world, const std::vector<Point> path, const Point& start, const Point& target) const = 0;
 
 }; // class WorldRendererInterface
 

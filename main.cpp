@@ -17,21 +17,17 @@ int main( int argc, const char* argv[] ) {
 
   PathNode pathNode(nullptr, 1, 1, 0, 14);
   
+  const Point start = {1, 1};
+  const Point target = {8, 1};
+  const unsigned int maxLength = 25;
+
   std::vector<Point> path;
-  for(int i = 2; i < 5; ++i) {
-    Point p(i, 3);
-    path.push_back(p);
-  }
-
-  for(int i = 3; i < 7; ++i) {
-    Point p(4, i);
-    path.push_back(p);
-  }
-
   PathFinder pathFinder;
 
+  pathFinder.findPath(start, target, world, worldWidth, worldHeight, path, maxLength);
 
-  worldRenderer.renderWorld(worldWidth, worldHeight, world, path);
+
+  worldRenderer.renderWorld(worldWidth, worldHeight, world, path, start, target);
 
   //PathFinder pathFinder(&worldRenderer);
 }
