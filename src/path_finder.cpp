@@ -52,8 +52,6 @@ int PathFinder::findPath(const Point start,
     currentNode = currentNodeShrPtr.get();
     searchQueue.pop();
 
-    currentNode->printNode("current = ");
-
     // adding the node that is currently being explored to the closed set
     closedSet[currentNode->getPosX() + currentNode->getPosY()*worldWidth] = currentNodeShrPtr;
 

@@ -1,7 +1,5 @@
 #include "path_node.hpp"
 
-#include <iostream>
-
 PathNode::PathNode(PathNode* parent, unsigned int posX, unsigned int posY, int gCost, int hCost) : parent_(parent), posX_(posX), posY_(posY), gCost_(gCost), hCost_(hCost) {
 
 }
@@ -52,8 +50,4 @@ const float PathNode::getFCost() const{
 
 bool PathNode::isEqual(const Point &other) const {
   return posX_ == other.getX() && posY_ == other.getY();
-}
-
-void PathNode::printNode(std::string text) const {
-  std::cout << text << " (" << posX_ << ", " << posY_ << ")" << std::endl;
 }

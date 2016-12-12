@@ -1,9 +1,11 @@
 #ifndef world_hpp
 #define world_hpp
 
+#include <string>
+
 class World{
   public:
-    World(const unsigned int width, const unsigned int height);
+    World(const unsigned int width, const unsigned int height, const std::string worldFileName);
 
     ~World();
 
@@ -21,6 +23,8 @@ class World{
     const unsigned int width_;
     const unsigned int height_;
     unsigned int* mapData_;
+
+    void loadWorldFromFile(const std::string fileName);
 }; // class World
 
 #endif // world_hpp

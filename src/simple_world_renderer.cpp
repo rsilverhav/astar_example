@@ -23,10 +23,10 @@ void SimpleWorldRenderer::renderWorld(const unsigned int width, const unsigned i
         std::cout << "o ";
       } else {
         // if the maps contains a wall
-        if(world.getMapData(x, y) == 0u) {
+        if(world.getMapData(x, y) == 1u) {
           std::cout << "# ";
           // if the maps contains a floor
-        } else if (world.getMapData(x, y) == 1u) {
+        } else if (world.getMapData(x, y) == 0u) {
           std::cout << "  ";
         }
       }

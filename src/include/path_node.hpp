@@ -3,7 +3,6 @@
 
 #include "point.hpp"
 
-#include <string>
 #include <vector>
 
 /**
@@ -34,8 +33,6 @@ class PathNode {
   const float getFCost() const;
 
   bool isEqual(const Point& other) const;
-
-  void printNode(std::string text) const;
 
   private:
     PathNode* parent_;
