@@ -46,3 +46,7 @@ const int PathNode::getHCost() const{
 const float PathNode::getFCost() const{
   return gCost_ + hCost_;
 }
+
+bool PathNode::isEqual(const Point &other) const {
+  return posX_ == other.getX() && posY_ == other.getY();
+}

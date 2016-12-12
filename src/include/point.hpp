@@ -9,6 +9,8 @@ class Point{
 
     const unsigned int getY() const;
 
+    bool operator ==(const Point &rhs) const;
+
   private:
     unsigned int x_;
     unsigned int y_;

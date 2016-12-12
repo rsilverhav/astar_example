@@ -6,7 +6,7 @@ SimpleWorldRenderer::SimpleWorldRenderer() {
 
 }
 
-void SimpleWorldRenderer::renderWorld(const int width, const int height, const World& world, std::vector<Point> path) const {
+void SimpleWorldRenderer::renderWorld(const unsigned int width, const unsigned int height, const World& world, std::vector<Point> path) const {
   for(unsigned int y = 0; y < height; ++y) {
     for(unsigned int x = 0; x < width; ++x) {
 

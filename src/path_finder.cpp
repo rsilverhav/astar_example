@@ -14,10 +14,13 @@ using namespace std;
 PathFinder::PathFinder() {
 }
 
-int PathFinder::findPath(const int nStartX, const int nStartY,
-    const int nTargetX, const int nTargetY, 
-    const unsigned char* pMap, const int nMapWidth, const int nMapHeight,
-    int* pOutBuffer, const int nOutBufferSize)
+int PathFinder::findPath(const Point start,
+                         const Point target,
+                         const unsigned char* pMap,
+                         const int nMapWidth,
+                         const int nMapHeight,
+                         int* pOutBuffer,
+                         const int nOutBufferSize)
 {
 
 
@@ -31,16 +34,16 @@ int PathFinder::findPath(const int nStartX, const int nStartY,
     return -1;
   }
 
-  if(nStartX == nTargetX && nStartY == nTargetY){
+  if(start == target){
     return -1;
   }
 
 
   int xLimMin, xLimMax, checkPosX, checkPosY, index;
 
-  shared_ptr<PathNode> addNode = make_shared<PathNode>(nullptr, nStartX, nStartY, 0, calcHCost(nStartX, nStartY, nTargetX, nTargetY));
+  shared_ptr<PathNode> addNode = make_shared<PathNode>(nullptr, start.getX(), start.getY(), 0, calcHCost(start.getX(), start.getY(), target.getX(), target.getY()));
   searchQueue.emplace(addNode->getFCost(), addNode);
-  openSet[nStartX + nStartY*nMapWidth] = addNode;
+  openSet[start.getX() + start.getY()*nMapWidth] = addNode;
 
   shared_ptr<PathNode> currentNodeShrPtr;
   PathNode* currentNode;
@@ -56,8 +59,8 @@ int PathFinder::findPath(const int nStartX, const int nStartY,
     closedSet[currentNode->getPosX() + currentNode->getPosY()*nMapWidth] = currentNodeShrPtr;
 
     // goal found, setting path and returning length
-    if(currentNode->getPosX() == nTargetX && currentNode->getPosY() == nTargetY){
-      int distance = currentNode->setBufferToPath(&pOutBuffer, nMapWidth, nStartX, nStartY);
+    if(currentNode->isEqual(target)){
+      int distance = currentNode->setBufferToPath(&pOutBuffer, nMapWidth, start.getX(), start.getY());
 
       return distance;
     }
@@ -87,9 +90,9 @@ int PathFinder::findPath(const int nStartX, const int nStartY,
           if(newGCost > nOutBufferSize){
             continue;
           }
-          int newHCost = calcHCost(checkPosX, checkPosY, nTargetX, nTargetY);
+          int newHCost = calcHCost(checkPosX, checkPosY, target.getX(), target.getY());
           if(openSet.find(index) == openSet.end() || newGCost + newHCost < openSet[index]->getFCost()){
-            addNode = make_shared<PathNode>(currentNode, checkPosX, checkPosY, newGCost, calcHCost(checkPosX, checkPosY, nTargetX, nTargetY));
+            addNode = make_shared<PathNode>(currentNode, checkPosX, checkPosY, newGCost, calcHCost(checkPosX, checkPosY, target.getX(), target.getY()));
   searchQueue.emplace(addNode->getFCost(), addNode);
             openSet[index] = addNode;
             searchQueue.emplace(addNode->getFCost(), addNode);

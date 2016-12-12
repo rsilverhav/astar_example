@@ -1,6 +1,8 @@
 #ifndef path_node_hpp
 #define path_node_hpp
 
+#include "point.hpp"
+
 /**
  *  PathNode objects are used to represent a tile in the 2D grid.
  */
@@ -28,6 +30,8 @@ class PathNode {
 
   const float getFCost() const;
 
+
+  bool isEqual(const Point& other) const;
 
   private:
     PathNode* parent_;

@@ -13,3 +13,8 @@ const unsigned int Point::getX() const {
 const unsigned int Point::getY() const {
   return y_;
 }
+
+
+bool Point::operator ==(const Point &rhs) const {
+  return x_ == rhs.getX() && y_ == rhs.getY();
+}
