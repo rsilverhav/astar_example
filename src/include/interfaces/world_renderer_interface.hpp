@@ -19,6 +19,8 @@ class WorldRendererInterface {
      */
     virtual void renderWorld(const unsigned int width, const unsigned int height, const World& world, const std::vector<Point> path, const Point& start, const Point& target) const = 0;
 
+    inline virtual ~WorldRendererInterface() {};
+
 }; // class WorldRendererInterface
 
 } // namespace Interface

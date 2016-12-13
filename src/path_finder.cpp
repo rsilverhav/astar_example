@@ -38,6 +38,7 @@ int PathFinder::findPath(const Point start,
 
   int xLimMin, xLimMax, checkPosX, checkPosY, index;
 
+  // TODO: should be unique pointer, not shared pointer
   shared_ptr<PathNode> addNode = make_shared<PathNode>(nullptr, start.getX(), start.getY(), 0, calcHCost(start.getX(), start.getY(), target.getX(), target.getY()));
   searchQueue.emplace(addNode->getFCost(), addNode);
   openSet[start.getX() + start.getY()*worldWidth] = addNode;

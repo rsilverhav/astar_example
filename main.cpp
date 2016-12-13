@@ -3,6 +3,7 @@
 #include "point.hpp"
 #include "simple_world_renderer.hpp"
 #include "world.hpp"
+#include "world_renderer_interface.hpp"
 
 #include <iostream>
 #include <vector>
@@ -15,7 +16,9 @@ int main( int argc, const char* argv[] ) {
 
   const std::string worldFileName = "world.txt";
 
-  SimpleWorldRenderer worldRenderer;
+  // Creating a renderer from the WorldRendererInterface.
+  Interface::WorldRendererInterface* worldRenderer = new SimpleWorldRenderer();
+
   World world(worldWidth, worldHeight, worldFileName);
 
   // setting start point and target
@@ -25,7 +28,7 @@ int main( int argc, const char* argv[] ) {
 
   // printing map witout path
   std::cout << std::endl << std::endl << "------ The world to solve ------" << std::endl << std::endl;
-  worldRenderer.renderWorld(worldWidth, worldHeight, world, path, start, target);
+  worldRenderer->renderWorld(worldWidth, worldHeight, world, path, start, target);
 
   // some padding the rendering
   std::cout << std::endl << "-----------------------------------------" << std::endl;
@@ -39,6 +42,9 @@ int main( int argc, const char* argv[] ) {
   pathFinder.findPath(start, target, world, worldWidth, worldHeight, path, maxLength);
 
   // draws the map with the path
-  worldRenderer.renderWorld(worldWidth, worldHeight, world, path, start, target);
+  worldRenderer->renderWorld(worldWidth, worldHeight, world, path, start, target);
+
+  // cleaning up memory
+  delete worldRenderer;
 
 }
